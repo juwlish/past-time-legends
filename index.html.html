@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Time Legends — Camarillo's Premier Retro Collectibles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F0C832;
+    --gold-light: #F7DC6F;
+    --gold-dark: #B8960A;
+    --cream: #F0EAF8;
+    --ink: #0F0A1A;
+    --ink-mid: #1A1030;
+    --ink-light: #2E1D52;
+    --warm-gray: #8B7FA8;
+    --purple: rgba(147,51,234,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(147,51,234,0.2);
+    background: rgba(15,10,26,0.95);
+    backdrop-filter: blur(12px);
+    transition: padding 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.55rem 1.2rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    z-index: 910;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--cream);
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* Mobile menu drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15,10,26,0.98);
+    z-index: 850;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover, .mobile-menu a:active { color: var(--gold); }
+  .mobile-menu .mobile-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 1rem 2.5rem;
+    margin-top: 1rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 5rem 2rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 70% 40%, rgba(147,51,234,0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 80%, rgba(240,200,50,0.07) 0%, transparent 60%),
+      var(--ink);
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(147,51,234,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147,51,234,0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .hero-content { position: relative; z-index: 2; width: 100%; }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 18vw, 11rem);
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+  }
+  .hero-title span { color: var(--gold); display: block; }
+
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 3vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(240,234,248,0.65);
+    margin-top: 1.25rem;
+    max-width: 520px;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    border: none;
+    cursor: pointer;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: transparent;
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(240,234,248,0.3);
+    transition: border-color 0.2s, color 0.2s;
+    min-height: 48px;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+  .hero-scroll span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.4; transform: scaleY(0.7); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-section {
+    overflow: hidden;
+    border-top: 1px solid rgba(147,51,234,0.2);
+    border-bottom: 1px solid rgba(147,51,234,0.2);
+    background: var(--gold);
+    padding: 0.75rem 0;
+  }
+  .marquee-track {
+    display: flex;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    padding: 0 2rem;
+    white-space: nowrap;
+  }
+  .marquee-dot { color: var(--ink); opacity: 0.4; font-size: 0.45rem; vertical-align: middle; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--ink-mid);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(240,234,248,0.72);
+    margin-top: 1.75rem;
+  }
+  .about-quote {
+    border-left: 2px solid var(--gold);
+    padding-left: 1.25rem;
+    margin: 2rem 0;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.55;
+  }
+
+  .about-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(147,51,234,0.2);
+    border: 1px solid rgba(147,51,234,0.2);
+  }
+  .stat-card {
+    background: var(--ink);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-top: 0.4rem;
+    display: block;
+  }
+
+  /* ── CATEGORIES ── */
+  #categories { background: var(--ink); }
+
+  .categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(147,51,234,0.12);
+  }
+
+  .cat-card {
+    background: var(--ink-mid);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .cat-card:hover::before { transform: scaleX(1); }
+  .cat-card:hover { background: rgba(26,16,48,0.9); }
+
+  .cat-icon { font-size: 2rem; margin-bottom: 1.25rem; display: block; }
+  .cat-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+  .cat-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+  .cat-tag {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(240,200,50,0.3);
+    padding: 0.28rem 0.7rem;
+  }
+
+  /* ── REVIEWS ── */
+  #reviews {
+    background: var(--ink-mid);
+    position: relative;
+    overflow: hidden;
+  }
+  #reviews::before {
+    content: '"';
+    position: absolute;
+    top: -2rem; right: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(12rem, 30vw, 30rem);
+    color: rgba(147,51,234,0.07);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .reviews-header { text-align: center; margin-bottom: 3rem; }
+  .reviews-header .section-label { justify-content: center; }
+  .reviews-header .section-label::after { display: none; }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .review-card {
+    background: var(--ink);
+    border: 1px solid rgba(147,51,234,0.18);
+    padding: 1.75rem 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .review-card:hover { border-color: rgba(147,51,234,0.45); transform: translateY(-3px); }
+  .review-card.featured { border-color: rgba(240,200,50,0.35); background: rgba(26,16,48,0.7); }
+
+  .stars { color: var(--gold); font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.9rem; }
+  .review-text {
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(240,234,248,0.8);
+    margin-bottom: 1.25rem;
+  }
+  .review-author { display: flex; align-items: center; gap: 0.65rem; }
+  .review-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(147,51,234,0.15);
+    border: 1px solid rgba(147,51,234,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+
+  /* ── WHY US ── */
+  #why {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .why-left { position: sticky; top: 6rem; }
+  .why-list { margin-top: 1rem; }
+  .why-item {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid rgba(147,51,234,0.12);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .why-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--gold);
+    opacity: 0.6;
+    padding-top: 0.25rem;
+  }
+  .why-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.07em;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .why-desc {
+    font-size: 0.97rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  /* ── VISIT ── */
+  #visit { background: var(--ink-mid); }
+  .visit-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .visit-detail { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; }
+  .visit-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(147,51,234,0.12);
+  }
+  .visit-row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    min-width: 70px;
+    padding-top: 0.15rem;
+    flex-shrink: 0;
+  }
+  .visit-row-value {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.7;
+  }
+
+  .map-placeholder {
+    background: rgba(147,51,234,0.06);
+    border: 1px solid rgba(147,51,234,0.2);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(147,51,234,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147,51,234,0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .map-pin { font-size: 2.5rem; position: relative; z-index: 1; }
+  .map-address {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    position: relative; z-index: 1;
+    line-height: 1.8;
+  }
+  .map-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    display: inline-block;
+    position: relative; z-index: 1;
+    transition: background 0.2s;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+  .map-link:hover { background: var(--gold-light); }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--gold);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: 'PTL';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40vw;
+    color: rgba(15,10,26,0.06);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.6;
+    margin-bottom: 0.75rem;
+  }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 0.95;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .cta-sub {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(15,10,26,0.65);
+    max-width: 460px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    position: relative;
+  }
+  .ig-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    color: var(--ink);
+    background: var(--ink);
+    color: var(--gold);
+    border: 2px solid var(--ink);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: background 0.2s, color 0.2s;
+    min-height: 52px;
+  }
+  .ig-btn:hover {
+    background: rgba(15,10,26,0.85);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(147,51,234,0.2);
+    padding: 3.5rem 2rem 2rem;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.75rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .footer-tagline {
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--warm-gray);
+    line-height: 1.7;
+    max-width: 240px;
+  }
+  .footer-col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(147,51,234,0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .footer-legal {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: rgba(139,127,168,0.55);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+  .fade-up:nth-child(5) { transition-delay: 0.4s; }
+  .fade-up:nth-child(6) { transition-delay: 0.5s; }
+
+  /* ── TABLET (max 1024px) ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1rem 1.5rem; }
+
+    #hero { padding: 6.5rem 1.5rem 4rem; }
+
+    section { padding: 4rem 1.5rem; }
+
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-right { grid-template-columns: repeat(4, 1fr); }
+
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+
+    #why { grid-template-columns: 1fr; gap: 0; }
+    .why-left { position: static; margin-bottom: 1rem; }
+    .why-list { margin-top: 0; }
+
+    .visit-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .map-placeholder { aspect-ratio: 16/7; }
+
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  /* ── MOBILE (max 768px) ── */
+  @media (max-width: 768px) {
+    nav { padding: 0.9rem 1.25rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    #hero {
+      padding: 5.5rem 1.25rem 4rem;
+      min-height: 100svh;
+    }
+    .hero-eyebrow { font-size: 0.6rem; }
+    .hero-subtitle { font-size: 1.05rem; max-width: 100%; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .btn-primary, .btn-ghost { width: 100%; justify-content: center; padding: 1rem; }
+    .hero-scroll { display: none; }
+
+    section { padding: 3.5rem 1.25rem; }
+
+    .about-right { grid-template-columns: 1fr 1fr; }
+    .stat-card { padding: 1.5rem 1rem; }
+
+    .categories-grid { grid-template-columns: 1fr; }
+    .cat-card { padding: 2rem 1.5rem; }
+
+    .reviews-grid { grid-template-columns: 1fr; }
+
+    .visit-inner { grid-template-columns: 1fr; }
+    .map-placeholder { aspect-ratio: 4/3; }
+
+    #cta { padding: 4rem 1.25rem; }
+
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-tagline { max-width: 100%; }
+
+    .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+  }
+
+  /* ── SMALL MOBILE (max 480px) ── */
+  @media (max-width: 480px) {
+    nav { padding: 0.85rem 1rem; }
+
+    #hero { padding: 5rem 1rem 3.5rem; }
+
+    section { padding: 3rem 1rem; }
+
+    .about-right { grid-template-columns: 1fr 1fr; }
+
+    .visit-row { gap: 1rem; }
+    .visit-row-label { min-width: 60px; font-size: 0.55rem; }
+    .visit-row-value { font-size: 0.92rem; }
+
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-brand { grid-column: auto; }
+
+    .map-placeholder { aspect-ratio: 3/2; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#categories" onclick="closeMobile()">Shop</a>
+  <a href="#reviews" onclick="closeMobile()">Reviews</a>
+  <a href="#visit" onclick="closeMobile()">Visit</a>
+  <a href="#visit" class="mobile-cta" onclick="closeMobile()">Find Us</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Past Time Legends</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#categories">Shop</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#visit" class="nav-cta">Find Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Camarillo, California</p>
+    <h1 class="hero-title">PAST TIME<span>LEGENDS</span></h1>
+    <p class="hero-subtitle">Where every cartridge carries a memory, every card holds a universe, and every shelf holds a story.</p>
+    <div class="hero-actions">
+      <a href="#categories" class="btn-primary">Explore the Collection</a>
+      <a href="#visit" class="btn-ghost">Visit Us Today</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Retro Games <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Pokémon Cards <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">VHS &amp; Vinyl <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Action Figures <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Vintage Consoles <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Comics &amp; Manga <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Funko Pops <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Fair Pricing <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Retro Games <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Pokémon Cards <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">VHS &amp; Vinyl <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Action Figures <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Vintage Consoles <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Comics &amp; Manga <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Funko Pops <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">Fair Pricing <span class="marquee-dot">●</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">Ventura County's <em>hidden gem</em> for collectors</h2>
+    <p class="about-text">Past Time Legends is Camarillo's premier destination for retro gaming, collectibles, and the pure joy of rediscovery. Owner Chris has built something rare: a welcoming, knowledgeable space where nostalgia isn't just celebrated — it's curated.</p>
+    <blockquote class="about-quote">"Nostalgia galore! This store is a vibe and the owner Chris always hooks me up."</blockquote>
+    <p class="about-text">Whether you're hunting down a childhood console, building your Pokémon collection, or stumbling across something you forgot you loved — Past Time Legends delivers every time.</p>
+  </div>
+  <div class="about-right">
+    <div class="stat-card fade-up">
+      <span class="stat-number">★ 5.0</span>
+      <span class="stat-label">Google Rating</span>
+    </div>
+    <div class="stat-card fade-up">
+      <span class="stat-number">20+</span>
+      <span class="stat-label">Five-Star Reviews</span>
+    </div>
+    <div class="stat-card fade-up">
+      <span class="stat-number">100%</span>
+      <span class="stat-label">Working Guarantee</span>
+    </div>
+    <div class="stat-card fade-up">
+      <span class="stat-number">#1</span>
+      <span class="stat-label">In Ventura County</span>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="categories-header">
+    <div>
+      <p class="section-label">The Collection</p>
+      <h2 class="section-title">Something for <em>every legend</em></h2>
+    </div>
+    <a href="#visit" class="btn-ghost">See It In Person →</a>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card fade-up">
+      <span class="cat-icon">🎮</span>
+      <div class="cat-title">Retro Video Games</div>
+      <p class="cat-desc">From NES to PS2 and everything in between. Every game is tested and guaranteed to work — no dead cartridges, no disappointment.</p>
+      <span class="cat-tag">All Consoles</span>
+    </div>
+    <div class="cat-card fade-up">
+      <span class="cat-icon">🃏</span>
+      <div class="cat-title">Pokémon &amp; TCG</div>
+      <p class="cat-desc">Competitive pricing on sealed packs, singles, and collections. Chris's Pokémon pricing is widely recognized as the fairest in Ventura County.</p>
+      <span class="cat-tag">Fair Prices</span>
+    </div>
+    <div class="cat-card fade-up">
+      <span class="cat-icon">🕹️</span>
+      <div class="cat-title">Vintage Consoles</div>
+      <p class="cat-desc">Every system you grew up loving. Tested, cleaned, and ready to play the moment you get home. Own a piece of gaming history.</p>
+      <span class="cat-tag">Tested &amp; Working</span>
+    </div>
+    <div class="cat-card fade-up">
+      <span class="cat-icon">🎬</span>
+      <div class="cat-title">VHS &amp; Media</div>
+      <p class="cat-desc">One of the best curated VHS selections in the area. A growing trove of nostalgic cinema waiting to be rediscovered on tape.</p>
+      <span class="cat-tag">Growing Selection</span>
+    </div>
+    <div class="cat-card fade-up">
+      <span class="cat-icon">🦸</span>
+      <div class="cat-title">Action Figures &amp; Pops</div>
+      <p class="cat-desc">Vintage action figures, Funko Pops, plushies, and rare toys. The kind of finds you don't stumble on at big-box stores.</p>
+      <span class="cat-tag">Rare Finds</span>
+    </div>
+    <div class="cat-card fade-up">
+      <span class="cat-icon">📚</span>
+      <div class="cat-title">Comics &amp; More</div>
+      <p class="cat-desc">Comics, manga, collectibles — the store keeps growing. Every visit reveals something new. Come back often; the shelves never stay the same.</p>
+      <span class="cat-tag">Always Expanding</span>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-header">
+    <p class="section-label">What People Say</p>
+    <h2 class="section-title">Legends <em>don't need</em> advertising</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card featured fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Awesome store! For those of you who grew up playing video games you will find every system that you ever had, plus all the games to go with it, as well as an owner who is very knowledgeable, helpful, and kind."</p>
+      <div class="review-author">
+        <div class="review-avatar">MC</div>
+        <span class="review-name">Marilyn Cook · Local Guide</span>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Great place to look for retro treasures. The owner is friendly and helpful."</p>
+      <div class="review-author">
+        <div class="review-avatar">BS</div>
+        <span class="review-name">Brandon Smith · Local Guide</span>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Being able to have such a local place to share my interests and find the best deals is amazing."</p>
+      <div class="review-author">
+        <div class="review-avatar">GN</div>
+        <span class="review-name">Godeaterneon</span>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"His Pokémon pricing is very fair compared to the other Camarillo TCG store. Chris is very welcoming and really fair with his pricing."</p>
+      <div class="review-author">
+        <div class="review-avatar">RB</div>
+        <span class="review-name">Ryan Bates</span>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Better than other game stores in Ventura County! Will definitely be coming back soon!"</p>
+      <div class="review-author">
+        <div class="review-avatar">EF</div>
+        <span class="review-name">Eder Flores</span>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I've even gotten some pretty good pulls from some Pokémon packs! Customer service is top tier as well."</p>
+      <div class="review-author">
+        <div class="review-avatar">BH</div>
+        <span class="review-name">Bobby Hill</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-left">
+    <p class="section-label">Why Choose Us</p>
+    <h2 class="section-title">The Past Time <em>difference</em></h2>
+    <p class="about-text" style="margin-top:1.25rem;">Every store sells old games. Very few sell them with expertise, care, and prices that don't insult your intelligence. We do all three.</p>
+  </div>
+  <div class="why-list">
+    <div class="why-item fade-up">
+      <span class="why-num">01</span>
+      <div>
+        <div class="why-title">Fair &amp; Transparent Pricing</div>
+        <p class="why-desc">No gouging. No nonsense. Chris does the research so you don't have to — and the result is pricing that regulars keep coming back for, especially on Pokémon cards and retro titles.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up">
+      <span class="why-num">02</span>
+      <div>
+        <div class="why-title">Everything Works. Guaranteed.</div>
+        <p class="why-desc">Every cartridge, every console, every disc — tested before it hits the shelf. Customers report zero returns and total confidence in every purchase.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up">
+      <span class="why-num">03</span>
+      <div>
+        <div class="why-title">A Community, Not Just a Store</div>
+        <p class="why-desc">Regulars don't just shop here — they belong here. Chris knows his customers, their interests, and how to make every visit feel like hanging out with a friend who happens to know everything about retro gaming.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up">
+      <span class="why-num">04</span>
+      <div>
+        <div class="why-title">Clean Space, Wide Selection</div>
+        <p class="why-desc">Room to breathe, room to browse. Our Camarillo location is organized, accessible, and stocked with a diverse range that grows every month.</p>
+      </div>
+    </div>
+    <div class="why-item fade-up">
+      <span class="why-num">05</span>
+      <div>
+        <div class="why-title">Trade-Ins Welcome</div>
+        <p class="why-desc">Turn your unwanted games and collectibles into store credit or cash. Fair trade-in values, no lowball offers, and a smooth transaction every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="visit-inner">
+    <div class="visit-info">
+      <p class="section-label">Come In</p>
+      <h2 class="section-title">Find us in <em>Camarillo</em></h2>
+      <div class="visit-detail">
+        <div class="visit-row">
+          <span class="visit-row-label">Address</span>
+          <span class="visit-row-value">2108 E Ponderosa Dr<br>Camarillo, CA 93010</span>
+        </div>
+        <div class="visit-row">
+          <span class="visit-row-label">Phone</span>
+          <span class="visit-row-value"><a href="tel:+18054194679" style="color:inherit;text-decoration:none;">(805) 419-4679</a></span>
+        </div>
+        <div class="visit-row">
+          <span class="visit-row-label">Hours</span>
+          <span class="visit-row-value">
+            Mon – Sat &nbsp; 12:00 – 6:00 PM<br>
+            Sunday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Closed
+          </span>
+        </div>
+        <div class="visit-row">
+          <span class="visit-row-label">Trade-Ins</span>
+          <span class="visit-row-value">Welcome anytime during store hours. Fair valuations, always.</span>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <div class="map-pin">📍</div>
+      <div class="map-address">
+        PAST TIME LEGENDS<br>
+        2108 E PONDEROSA DR<br>
+        CAMARILLO, CA 93010
+      </div>
+      <a href="https://maps.google.com/?q=2108+E+Ponderosa+Dr+Camarillo+CA+93010" class="map-link" target="_blank" rel="noopener">Open in Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <p class="cta-label">Stay Connected</p>
+  <h2 class="cta-title">NEW ARRIVALS.<br>FIRST TO KNOW.</h2>
+  <p class="cta-sub">Follow us on Instagram for new inventory drops, rare finds, and store updates — straight to your feed.</p>
+  <a href="https://instagram.com/pastime_legends_camarilllo" target="_blank" rel="noopener" class="ig-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @pastime_legends_camarilllo
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">Past Time Legends</span>
+      <p class="footer-tagline">Camarillo's home for retro games, collectibles, and the thrill of the find.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="#categories">Video Games</a></li>
+        <li><a href="#categories">Pokémon TCG</a></li>
+        <li><a href="#categories">Vintage Consoles</a></li>
+        <li><a href="#categories">VHS &amp; Media</a></li>
+        <li><a href="#categories">Action Figures</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Info</p>
+      <ul class="footer-links">
+        <li><a href="#about">About Chris</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+        <li><a href="#why">Trade-Ins</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Connect</p>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com/pastime_legends_camarilllo" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://maps.google.com/?q=2108+E+Ponderosa+Dr+Camarillo+CA+93010" target="_blank">Google Maps</a></li>
+        <li><a href="tel:+18054194679">(805) 419-4679</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-legal">© 2025 Past Time Legends. Camarillo, CA. All rights reserved.</span>
+    <span class="footer-legal">Legends Never Die.</span>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close menu on outside tap
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) closeMobile();
+  });
+
+  // Scroll-aware nav padding (desktop only)
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth > 768) {
+      nav.style.padding = window.scrollY > 60 ? '0.7rem 2rem' : '1rem 2rem';
+    }
+  }, { passive: true });
+
+  // Fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+
+</script>
+</body>
+</html>
